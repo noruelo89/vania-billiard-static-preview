@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title> | Vania Billiard</title>
+<meta name="description" content="">
+
+<!-- Open Graph -->
+<meta property="og:title" content=" | Vania Billiard">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vania Billiard">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+
+<!-- Google Fonts: Inter (sans) + Playfair Display (serif) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    darkMode: 'class',
+    theme: {
+        extend: {
+            colors: {
+                'luxury-bg':      '#0a0a0a',
+                'luxury-surface': '#141414',
+                'luxury-copper':  '#C86A36',
+                'copper': {
+                    light:  '#D4875E',
+                    DEFAULT:'#C86A36',
+                    dark:   '#A85A2C',
+                },
+            },
+            fontFamily: {
+                sans: ['Inter', 'system-ui', 'sans-serif'],
+                serif:['Playfair Display', 'Georgia', 'serif'],
+            },
+        },
+    },
+};
+</script>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<!-- AOS (Animate On Scroll) CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<!-- Inline custom styles -->
+<style>
+    /* Body opacity transition for page-load fade-in */
+    body {
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+    }
+    body.loaded {
+        opacity: 1;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #C86A36;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #D4875E;
+    }
+
+    /* Active language button styling */
+    .lang-active {
+        color: #C86A36 !important;
+        font-weight: 700;
+    }
+
+    /* Hover card effect */
+    .hover-card-effect {
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hover-card-effect:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(200, 106, 54, 0.15);
+    }
+
+    /* Editorial image zoom effect */
+    .editorial-img {
+        transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .editorial-img:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<!-- Theme initialization: apply stored theme before paint to prevent flash -->
+<script>
+(function() {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light') {
+        document.documentElement.classList.remove('dark');
+    } else {
+        // Default to dark
+        document.documentElement.classList.add('dark');
+    }
+})();
+</script>
+
+    
+
+    <style>
+        /* Masonry grid */
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+        }
+        @media (max-width: 1024px) { .masonry-grid { column-count: 2; } }
+        @media (max-width: 640px) { .masonry-grid { column-count: 1; } }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Gallery hover overlay */
+        .gallery-overlay {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-card:hover .gallery-overlay { opacity: 1; }
+        .gallery-card .gallery-img {
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .gallery-card:hover .gallery-img { transform: scale(1.05); }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Timeline */
+        .timeline-line {
+            background: linear-gradient(to bottom, transparent, #C86A36, transparent);
+        }
+        .timeline-dot {
+            box-shadow: 0 0 0 4px #0a0a0a, 0 0 0 6px #C86A36;
+        }
+
+        /* Filter btn */
+        .filter-btn { transition: all 0.3s ease; }
+        .filter-btn.active { background-color: #C86A36; color: #fff; border-color: #C86A36; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-luxury-bg dark:text-gray-100 font-sans antialiased overflow-x-hidden transition-colors duration-500 selection:bg-luxury-copper selection:text-white flex flex-col min-h-screen">
+
+    
+
+    <!-- ===== HERO SECTION ===== -->
+    <header class="relative pt-36 pb-24 px-8 md:px-20 bg-[#050505] overflow-hidden">
+        <!-- Subtle background pattern -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23C86A36\" fill-opacity=\"1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+        <div class="relative max-w-4xl mx-auto text-center" data-aos="fade-up">
+            <span class="text-luxury-copper uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block">Our Story</span>
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-white mb-8 leading-tight">Jejak Karya.</h1>
+            <div class="w-16 h-px bg-luxury-copper mx-auto mb-8"></div>
+            <p class="font-light text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-4">
+                Kami bukan sekadar produsen meja biliar. Kami adalah <span class="text-luxury-copper font-medium">kurator presisi</span> — menggabungkan keahlian tangan pengrajin Jepara dengan sains material modern untuk menciptakan permukaan bermain yang sempurna.
+            </p>
+            <p class="font-light text-gray-500 text-sm leading-relaxed max-w-xl mx-auto">
+                Setiap meja yang lahir dari workshop kami adalah perpaduan antara warisan dan inovasi. Kayu dipilih butir per butir. Slate dikalibrasi hingga seperseratus milimeter. Kain direntangkan tanpa kompromi. Itulah standar Vania Billiard.
+            </p>
+        </div>
+    </header>
+
+    <!-- ===== STATS ROW ===== -->
+    <section class="relative -mt-8 z-10 px-8 md:px-20">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="bg-luxury-surface border border-gray-800 rounded-lg p-6 text-center hover-card-effect">
+                    <span class="block font-serif text-3xl md:text-4xl text-luxury-copper font-bold mb-1">150+</span>
+                    <span class="text-xs uppercase tracking-widest text-gray-400">Unit Terinstal</span>
+                </div>
+                <div class="bg-luxury-surface border border-gray-800 rounded-lg p-6 text-center hover-card-effect">
+                    <span class="block font-serif text-3xl md:text-4xl text-luxury-copper font-bold mb-1">15+</span>
+                    <span class="text-xs uppercase tracking-widest text-gray-400">Kota Terjangkau</span>
+                </div>
+                <div class="bg-luxury-surface border border-gray-800 rounded-lg p-6 text-center hover-card-effect">
+                    <span class="block font-serif text-3xl md:text-4xl text-luxury-copper font-bold mb-1">2018</span>
+                    <span class="text-xs uppercase tracking-widest text-gray-400">Tahun Berdiri</span>
+                </div>
+                <div class="bg-luxury-surface border border-gray-800 rounded-lg p-6 text-center hover-card-effect">
+                    <span class="block font-serif text-3xl md:text-4xl text-luxury-copper font-bold mb-1">100%</span>
+                    <span class="text-xs uppercase tracking-widest text-gray-400">Precision Leveling</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY SECTION ===== -->
+    <section class="py-20 md:py-28 bg-white dark:bg-luxury-bg transition-colors">
+        <div class="max-w-7xl mx-auto px-8 md:px-12">
+
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="text-luxury-copper uppercase tracking-[0.3em] text-[10px] font-bold mb-3 block">Portfolio</span>
+                <h2 class="font-serif text-3xl md:text-5xl text-gray-900 dark:text-white mb-4">Galeri Karya</h2>
+                <div class="w-12 h-px bg-luxury-copper mx-auto mb-4"></div>
+                <p class="text-gray-500 dark:text-gray-400 text-sm max-w-md mx-auto">Dokumentasi visual perjalanan kami — dari workshop hingga instalasi di lokasi klien.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="100">
+                <button class="filter-btn active px-5 py-2 text-xs uppercase tracking-widest font-semibold border border-gray-300 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:border-luxury-copper hover:text-luxury-copper" data-filter="all">Semua</button>
+                <button class="filter-btn px-5 py-2 text-xs uppercase tracking-widest font-semibold border border-gray-300 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:border-luxury-copper hover:text-luxury-copper" data-filter="instalasi">Instalasi</button>
+                <button class="filter-btn px-5 py-2 text-xs uppercase tracking-widest font-semibold border border-gray-300 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:border-luxury-copper hover:text-luxury-copper" data-filter="workshop">Workshop</button>
+                <button class="filter-btn px-5 py-2 text-xs uppercase tracking-widest font-semibold border border-gray-300 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:border-luxury-copper hover:text-luxury-copper" data-filter="kustom">Kustom</button>
+                <button class="filter-btn px-5 py-2 text-xs uppercase tracking-widest font-semibold border border-gray-300 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:border-luxury-copper hover:text-luxury-copper" data-filter="event">Event</button>
+            </div>
+
+            
+                <!-- Empty State -->
+                <div class="text-center py-20" data-aos="fade-up">
+                    <svg class="w-16 h-16 mx-auto text-gray-300 dark:text-gray-700 mb-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/>
+                    </svg>
+                    <h3 class="font-serif text-2xl text-gray-900 dark:text-white mb-3">Galeri Segera Hadir</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Dokumentasi karya kami sedang dalam proses kurasi.</p>
+                </div>
+            
+
+                <!-- Masonry Gallery -->
+                <div class="masonry-grid" id="gallery-grid">
+                    
+                        
+                        <div class="masonry-item gallery-card"
+                             data-category=""
+                             data-aos="fade-up"
+                             data-aos-delay=""
+                             data-full-src="assets/images"
+                             data-title="">
+
+                            <div class="relative rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 cursor-pointer group">
+                                
+                                    <img src="assets/images"
+                                         alt=""
+                                         loading="lazy"
+                                         class="gallery-img w-full h-auto object-cover">
+                                
+                                    <div class="gallery-img w-full aspect-[4/3] bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
+                                        <span class="text-white/10 font-serif italic text-sm">Vania Billiard</span>
+                                    </div>
+                                
+
+                                <!-- Hover Overlay -->
+                                <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-5">
+                                    <span class="text-[9px] uppercase tracking-widest font-bold px-2 py-1 rounded-full border inline-block w-fit mb-2   ">
+                                        
+                                    </span>
+                                    <h4 class="font-serif text-white text-lg leading-snug mb-1"></h4>
+                                    <div class="flex items-center gap-3 text-gray-300 text-xs">
+                                        
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3 h-3 text-luxury-copper" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                                
+                                            </span>
+                                        
+                                        
+                                            <span class="flex items-center gap-1">
+                                                <svg class="w-3 h-3 text-luxury-copper" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+                                                
+                                            </span>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+
+            
+        </div>
+    </section>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div id="lightbox" class="lightbox-overlay fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white/60 hover:text-white transition-colors z-10">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div class="max-w-5xl w-full max-h-[90vh] flex flex-col items-center">
+            <img id="lightbox-img" src="" alt="" class="max-h-[80vh] w-auto max-w-full object-contain rounded-lg shadow-2xl">
+            <p id="lightbox-title" class="text-white font-serif text-lg mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <!-- ===== TIMELINE SECTION ===== -->
+    <section class="py-20 md:py-28 bg-gray-50 dark:bg-[#050505] transition-colors">
+        <div class="max-w-4xl mx-auto px-8 md:px-12">
+
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-luxury-copper uppercase tracking-[0.3em] text-[10px] font-bold mb-3 block">Milestone</span>
+                <h2 class="font-serif text-3xl md:text-5xl text-gray-900 dark:text-white mb-4">Perjalanan Kami</h2>
+                <div class="w-12 h-px bg-luxury-copper mx-auto"></div>
+            </div>
+
+            <div class="relative">
+                <!-- Vertical Line -->
+                <div class="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 timeline-line"></div>
+
+                
+                    <div class="relative flex items-start mb-16 last:mb-0 "
+                         data-aos=""
+                         data-aos-delay="">
+
+                        <!-- Dot -->
+                        <div class="absolute left-6 md:left-1/2 -translate-x-1/2 w-3 h-3 bg-luxury-copper rounded-full timeline-dot z-10 mt-1.5"></div>
+
+                        <!-- Content -->
+                        <div class="ml-16 md:ml-0 md:w-1/2 ">
+                            <span class="inline-block font-serif text-3xl text-luxury-copper font-bold mb-2"></span>
+                            <h3 class="font-serif text-xl text-gray-900 dark:text-white mb-2"></h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed"></p>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="py-20 md:py-28 bg-luxury-bg relative overflow-hidden">
+        <!-- Background accent -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-luxury-copper blur-[150px]"></div>
+        </div>
+
+        <div class="relative max-w-3xl mx-auto px-8 md:px-12 text-center" data-aos="fade-up">
+            <span class="text-luxury-copper uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block">Mulai Proyek Anda</span>
+            <h2 class="font-serif text-3xl md:text-5xl text-white mb-6 leading-tight">Wujudkan Meja Impian<br><span class="text-luxury-copper">Bersama Kurator Kami</span></h2>
+            <p class="text-gray-400 text-sm leading-relaxed mb-10 max-w-lg mx-auto">
+                Dari konsultasi desain hingga instalasi di lokasi Anda — tim kurator kami siap membimbing setiap langkah. Hubungi kami sekarang untuk konsultasi VIP tanpa biaya.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://wa.me/?text="
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center gap-3 px-8 py-4 bg-luxury-copper text-white font-semibold rounded-full hover:bg-copper-dark transition-colors duration-300 shadow-lg shadow-luxury-copper/20 text-sm">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Chat via WhatsApp
+                </a>
+                <a href="katalog.html"
+                   class="inline-flex items-center gap-2 px-8 py-4 border border-gray-700 text-gray-300 font-medium rounded-full hover:border-luxury-copper hover:text-luxury-copper transition-colors duration-300 text-sm">
+                    Lihat Koleksi
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    
+
+    
+
+    
+</body>
+</html>

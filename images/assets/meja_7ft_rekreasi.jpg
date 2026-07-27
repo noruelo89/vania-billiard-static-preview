@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#1a2a1a"/>
+  <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" 
+        font-family="Georgia, serif" font-size="36" fill="rgba(255,255,255,0.3)">Meja 7FT</text>
+  <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" 
+        font-family="Arial" font-size="14" fill="rgba(255,255,255,0.15)">VANIA BILLIARD</text>
+</svg>

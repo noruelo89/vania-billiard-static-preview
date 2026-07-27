@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /config/
+Disallow: /sql/
+Sitemap: https://vaniabilliard.com/sitemap.xml

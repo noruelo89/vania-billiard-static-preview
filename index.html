@@ -1,0 +1,637 @@
+
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title> | Vania Billiard</title>
+<meta name="description" content="">
+
+<!-- Open Graph -->
+<meta property="og:title" content=" | Vania Billiard">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vania Billiard">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+
+<!-- Google Fonts: Inter (sans) + Playfair Display (serif) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    darkMode: 'class',
+    theme: {
+        extend: {
+            colors: {
+                'luxury-bg':      '#0a0a0a',
+                'luxury-surface': '#141414',
+                'luxury-copper':  '#C86A36',
+                'copper': {
+                    light:  '#D4875E',
+                    DEFAULT:'#C86A36',
+                    dark:   '#A85A2C',
+                },
+            },
+            fontFamily: {
+                sans: ['Inter', 'system-ui', 'sans-serif'],
+                serif:['Playfair Display', 'Georgia', 'serif'],
+            },
+        },
+    },
+};
+</script>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<!-- AOS (Animate On Scroll) CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<!-- Inline custom styles -->
+<style>
+    /* Body opacity transition for page-load fade-in */
+    body {
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+    }
+    body.loaded {
+        opacity: 1;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #C86A36;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #D4875E;
+    }
+
+    /* Active language button styling */
+    .lang-active {
+        color: #C86A36 !important;
+        font-weight: 700;
+    }
+
+    /* Hover card effect */
+    .hover-card-effect {
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hover-card-effect:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(200, 106, 54, 0.15);
+    }
+
+    /* Editorial image zoom effect */
+    .editorial-img {
+        transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .editorial-img:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<!-- Theme initialization: apply stored theme before paint to prevent flash -->
+<script>
+(function() {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light') {
+        document.documentElement.classList.remove('dark');
+    } else {
+        // Default to dark
+        document.documentElement.classList.add('dark');
+    }
+})();
+</script>
+
+    
+
+    <style>
+        /* ===== Page-specific CSS: Preloader ===== */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        #preloader .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(200, 106, 54, 0.2);
+            border-top-color: #C86A36;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== Page-specific CSS: Cursor Blink ===== */
+        .cursor-blink::after {
+            content: '|';
+            animation: blink 0.7s step-end infinite;
+            color: #C86A36;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* ===== Page-specific CSS: Marquee / Trust Ticker ===== */
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== Page-specific CSS: Stat counter ===== */
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== Page-specific CSS: Anatomy hotspot pulse ===== */
+        .hotspot-pulse {
+            animation: hotspotPulse 2s ease-in-out infinite;
+        }
+        @keyframes hotspotPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(200, 106, 54, 0.4); }
+            50% { box-shadow: 0 0 0 12px rgba(200, 106, 54, 0); }
+        }
+
+        /* ===== Page-specific CSS: Color dots ===== */
+        .color-dot {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .color-dot:hover,
+        .color-dot.active {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 3px rgba(200, 106, 54, 0.5);
+        }
+
+        /* ===== Page-specific CSS: Quiz modal ===== */
+        .quiz-modal-backdrop {
+            backdrop-filter: blur(8px);
+        }
+
+        /* ===== Page-specific CSS: Live activity ===== */
+        .live-activity {
+            animation: slideUp 0.5s ease-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-luxury-bg dark:text-gray-100 font-sans antialiased overflow-x-hidden transition-colors duration-500 selection:bg-luxury-copper selection:text-white flex flex-col min-h-screen">
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="spinner mb-4"></div>
+        <span class="text-luxury-copper text-xs uppercase tracking-[0.3em] font-semibold">Memuat...</span>
+    </div>
+
+    
+
+    <!-- Flash message display -->
+    
+    <div class="max-w-4xl mx-auto px-4 mt-4">
+        <div class="p-4 rounded-lg text-sm font-medium
+            "
+            role="alert">
+            
+        </div>
+    </div>
+    
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+        <!-- Background gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-luxury-bg via-[#111] to-luxury-bg"></div>
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-luxury-copper/5 blur-[120px] pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+
+            <!-- Hero Text -->
+            <div class="w-full lg:w-1/2" data-aos="fade-right">
+                <div class="flex items-center text-luxury-copper mb-8">
+                    <div class="w-12 h-px bg-luxury-copper mr-4"></div>
+                    <span class="text-xs uppercase tracking-[0.3em] font-bold" data-tr="hero_cta_1">Eksplorasi Kurasi</span>
+                </div>
+                <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] mb-8">
+                    <span class="block" data-tr="hero_title_1">Seni Presisi</span>
+                    <span class="block italic text-gray-400" data-tr="hero_title_2">Dalam</span>
+                    <span class="block text-luxury-copper typewriter-text cursor-blink"></span>
+                </h1>
+                <p class="font-light text-gray-400 text-sm md:text-base leading-relaxed mb-10 max-w-lg" data-tr="hero_desc">
+                    Menghadirkan furnitur hiburan bertaraf turnamen. Kami mengkurasi, mengirim, dan merakit presisi absolut untuk ruang eksklusif Anda.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="katalog.html" class="inline-flex items-center justify-center px-8 py-4 bg-luxury-copper text-white text-xs font-bold uppercase tracking-widest hover:bg-copper-dark transition-all duration-300 shadow-lg shadow-luxury-copper/20">
+                        <span data-tr="hero_cta_1">Eksplorasi Kurasi</span>
+                        <svg class="w-4 h-4 ml-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                    <a href="#anatomi" class="inline-flex items-center justify-center px-8 py-4 border border-gray-700 text-gray-300 text-xs font-bold uppercase tracking-widest hover:border-luxury-copper hover:text-luxury-copper transition-all duration-300">
+                        <span data-tr="hero_cta_2">Proses Leveling</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Visual: Swiper -->
+            <div class="w-full lg:w-1/2" data-aos="fade-left">
+                <div class="swiper heroSwiper w-full aspect-[4/3] bg-luxury-surface border border-gray-800 overflow-hidden shadow-2xl">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide bg-[#111] flex items-center justify-center">
+                            <img src="assets/images/hero_1.jpg" alt="Meja Billiard Premium Vania" class="w-full h-full object-cover opacity-90">
+                        </div>
+                        <div class="swiper-slide bg-[#111] flex items-center justify-center">
+                            <img src="assets/images/hero_2.jpg" alt="Detail Presisi Meja Vania" class="w-full h-full object-cover opacity-90">
+                        </div>
+                        <div class="swiper-slide bg-[#111] flex items-center justify-center">
+                            <img src="assets/images/hero_3.jpg" alt="Instalasi VIP Meja Vania" class="w-full h-full object-cover opacity-90">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TRUST TICKER / MARQUEE ===== -->
+    <section class="py-8 border-y border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-[#080808] overflow-hidden">
+        <p class="text-center text-[10px] uppercase tracking-[0.3em] text-gray-500 mb-5 font-bold" data-tr="trust_title">Dipercaya Oleh:</p>
+        <div class="relative">
+            <div class="marquee-track">
+                <div class="flex items-center gap-16 px-8">
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Hotel Mulia</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Raffles Jakarta</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">The Langham</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Grand Hyatt</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Mandarin Oriental</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Four Seasons</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Shangri-La</span>
+                    <span class="text-gray-400">•</span>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="flex items-center gap-16 px-8">
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Hotel Mulia</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Raffles Jakarta</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">The Langham</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Grand Hyatt</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Mandarin Oriental</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Four Seasons</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600 dark:text-gray-500 font-serif text-lg italic whitespace-nowrap">Shangri-La</span>
+                    <span class="text-gray-400">•</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS SECTION ===== -->
+    <section class="py-20 bg-white dark:bg-luxury-bg transition-colors">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <h3 class="font-serif text-4xl md:text-5xl text-luxury-copper stat-number" data-target="350">0</h3>
+                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mt-2 font-bold" data-tr="stat_1">Unit Terinstalasi</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-serif text-4xl md:text-5xl text-luxury-copper stat-number" data-target="42">0</h3>
+                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mt-2 font-bold" data-tr="stat_2">Kota Jangkauan</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-serif text-4xl md:text-5xl text-luxury-copper stat-number" data-target="100">0</h3>
+                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mt-2 font-bold" data-tr="stat_3">Presisi Leveling</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="font-serif text-4xl md:text-5xl text-luxury-copper stat-number" data-target="24">0</h3>
+                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mt-2 font-bold" data-tr="stat_4">Dukungan Klien</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ANATOMY SECTION ===== -->
+    <section id="anatomi" class="py-24 bg-gray-50 dark:bg-[#050505] transition-colors border-y border-gray-200 dark:border-gray-900">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-luxury-copper uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block" data-tr="anatomi_sub">Anatomi Presisi</span>
+                <h2 class="font-serif text-3xl md:text-5xl text-gray-900 dark:text-white mb-6" data-tr="anatomi_title">Mengenal Komponen Turnamen</h2>
+                <div class="w-12 h-px bg-luxury-copper mx-auto mb-6"></div>
+                <p class="font-light text-gray-600 dark:text-gray-400 text-sm max-w-xl mx-auto" data-tr="anatomi_desc">
+                    Kemewahan sejati terletak pada detail yang tidak terlihat dari luar.
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <!-- Anatomy Image with Hotspots -->
+                <div class="w-full lg:w-1/2 relative" data-aos="fade-right">
+                    <img src="assets/images/anatomy_table.jpg" alt="Anatomi Meja Billiard Vania" class="w-full h-auto editorial-img">
+                    <!-- Hotspot 1 -->
+                    <div class="absolute top-[20%] left-[25%] w-6 h-6 bg-luxury-copper rounded-full hotspot-pulse cursor-pointer" data-tooltip="Slate Black Stone 2.5cm – Presisi leveling turnamen"></div>
+                    <!-- Hotspot 2 -->
+                    <div class="absolute top-[45%] left-[60%] w-6 h-6 bg-luxury-copper rounded-full hotspot-pulse cursor-pointer" data-tooltip="Kain Worsted Tanpa Bulu – Laju bola maksimal"></div>
+                    <!-- Hotspot 3 -->
+                    <div class="absolute top-[70%] left-[40%] w-6 h-6 bg-luxury-copper rounded-full hotspot-pulse cursor-pointer" data-tooltip="K-66 Tournament Rubber – Pantulan presisi"></div>
+                </div>
+
+                <!-- Anatomy Details -->
+                <div class="w-full lg:w-1/2 space-y-8" data-aos="fade-left">
+                    <div class="flex items-start gap-6 group">
+                        <div class="w-12 h-12 flex items-center justify-center bg-luxury-copper/10 text-luxury-copper shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest mb-2">Batu Black Slate</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-light leading-relaxed">Alas batu natural setebal 2.5cm yang dikalibrasi presisi dengan toleransi kemiringan kurang dari 0.5mm — standar turnamen internasional.</p>
+                        </div>
+                    </div>
+                    <div class="w-full h-px bg-gray-200 dark:bg-gray-800"></div>
+                    <div class="flex items-start gap-6 group">
+                        <div class="w-12 h-12 flex items-center justify-center bg-luxury-copper/10 text-luxury-copper shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest mb-2">Kain Worsted Tanpa Bulu</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-light leading-relaxed">Anyaman premium yang memaksimalkan laju bola dengan gesekan minimal. Tahan lama dan konsisten di segala kondisi kelembapan.</p>
+                        </div>
+                    </div>
+                    <div class="w-full h-px bg-gray-200 dark:bg-gray-800"></div>
+                    <div class="flex items-start gap-6 group">
+                        <div class="w-12 h-12 flex items-center justify-center bg-luxury-copper/10 text-luxury-copper shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest mb-2">Karet K-66 Tournament Grade</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-light leading-relaxed">Bantalan karet profesional yang memantulkan bola dengan energi konsisten. Standar yang digunakan di kejuaraan dunia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== QUOTE SECTION ===== -->
+    <section class="py-24 bg-luxury-bg relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-luxury-copper/5 via-transparent to-luxury-copper/5 pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10" data-aos="fade-up">
+            <svg class="w-12 h-12 text-luxury-copper/30 mx-auto mb-8" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
+            <blockquote class="font-serif text-xl md:text-3xl text-gray-300 leading-relaxed italic mb-8" data-tr="about_quote">
+                "Kami tidak memproduksi meja secara massal.<br>Kami menyeleksi, menguji, dan mengkurasi presisi absolut untuk ruang eksklusif Anda."
+            </blockquote>
+            <div class="w-12 h-px bg-luxury-copper mx-auto mb-4"></div>
+            <p class="text-xs uppercase tracking-widest text-gray-500 font-bold">Tim Kurator Vania Billiard</p>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS SECTION ===== -->
+    
+
+    <!-- ===== COLLECTION / FEATURED PRODUCTS ===== -->
+    <section class="py-24 bg-white dark:bg-luxury-bg transition-colors">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-luxury-copper uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block">Koleksi Pilihan</span>
+                <h2 class="font-serif text-3xl md:text-5xl text-gray-900 dark:text-white mb-6">Mahakarya Terbaru.</h2>
+                <div class="w-12 h-px bg-luxury-copper mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product Card 1 -->
+                <a href="katalog.html" class="group hover-card-effect p-4 -m-4 rounded-lg" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-full aspect-[4/3] bg-gray-200 dark:bg-luxury-surface mb-6 overflow-hidden border border-gray-200 dark:border-gray-800">
+                        <img src="assets/images/product_1.jpg" alt="Meja Turnamen Pro" class="w-full h-full object-cover editorial-img opacity-90 group-hover:opacity-100">
+                    </div>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-500 border border-gray-300 dark:border-gray-700 px-2 py-1">Turnamen</span>
+                    <h3 class="font-serif text-xl text-gray-900 dark:text-white mt-3 mb-2 group-hover:text-luxury-copper transition-colors">Abimanyu Pro 9FT</h3>
+                    <p class="font-light text-gray-500 text-xs leading-relaxed mb-4">Meja turnamen profesional dengan slate black stone 2.5cm dan kain worsted premium.</p>
+                    <span class="text-xs uppercase tracking-widest font-bold text-gray-900 dark:text-white group-hover:text-luxury-copper transition-colors flex items-center">
+                        Detail <svg class="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </span>
+                </a>
+
+                <!-- Product Card 2 -->
+                <a href="katalog.html" class="group hover-card-effect p-4 -m-4 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-full aspect-[4/3] bg-gray-200 dark:bg-luxury-surface mb-6 overflow-hidden border border-gray-200 dark:border-gray-800">
+                        <img src="assets/images/product_2.jpg" alt="Meja Residensial" class="w-full h-full object-cover editorial-img opacity-90 group-hover:opacity-100">
+                    </div>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-500 border border-gray-300 dark:border-gray-700 px-2 py-1">Residensial</span>
+                    <h3 class="font-serif text-xl text-gray-900 dark:text-white mt-3 mb-2 group-hover:text-luxury-copper transition-colors">Kencana Royal 8FT</h3>
+                    <p class="font-light text-gray-500 text-xs leading-relaxed mb-4">Meja residensial elegan dengan finishing kayu jati solid dan pocket kulit asli.</p>
+                    <span class="text-xs uppercase tracking-widest font-bold text-gray-900 dark:text-white group-hover:text-luxury-copper transition-colors flex items-center">
+                        Detail <svg class="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </span>
+                </a>
+
+                <!-- Product Card 3 -->
+                <a href="katalog.html" class="group hover-card-effect p-4 -m-4 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-full aspect-[4/3] bg-gray-200 dark:bg-luxury-surface mb-6 overflow-hidden border border-gray-200 dark:border-gray-800">
+                        <img src="assets/images/product_3.jpg" alt="Meja Rekreasi" class="w-full h-full object-cover editorial-img opacity-90 group-hover:opacity-100">
+                    </div>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-500 border border-gray-300 dark:border-gray-700 px-2 py-1">Rekreasi</span>
+                    <h3 class="font-serif text-xl text-gray-900 dark:text-white mt-3 mb-2 group-hover:text-luxury-copper transition-colors">Arjuna Classic 7FT</h3>
+                    <p class="font-light text-gray-500 text-xs leading-relaxed mb-4">Meja rekreasi serbaguna untuk ruang keluarga dengan desain minimalis modern.</p>
+                    <span class="text-xs uppercase tracking-widest font-bold text-gray-900 dark:text-white group-hover:text-luxury-copper transition-colors flex items-center">
+                        Detail <svg class="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </span>
+                </a>
+            </div>
+
+            <div class="text-center mt-12" data-aos="fade-up">
+                <a href="katalog.html" class="inline-flex items-center px-8 py-4 border border-luxury-copper text-luxury-copper text-xs font-bold uppercase tracking-widest hover:bg-luxury-copper hover:text-white transition-all duration-300">
+                    Lihat Semua Koleksi
+                    <svg class="w-4 h-4 ml-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LEAD FORM SECTION ===== -->
+    <section id="pesan" class="py-24 bg-gray-100 dark:bg-[#080808] transition-colors border-y border-gray-200 dark:border-gray-900">
+        <div class="max-w-5xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Form Info -->
+                <div class="w-full lg:w-2/5" data-aos="fade-right">
+                    <div class="flex items-center text-luxury-copper mb-6">
+                        <div class="w-12 h-px bg-luxury-copper mr-4"></div>
+                        <span class="text-xs uppercase tracking-[0.2em] font-bold">Konsultasi VIP</span>
+                    </div>
+                    <h2 class="font-serif text-3xl md:text-4xl text-gray-900 dark:text-white mb-6" data-tr="form_title">Undangan Diskusi.</h2>
+                    <p class="font-light text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-8" data-tr="form_desc">
+                        Sampaikan kebutuhan Anda. Berikan detail lokasi agar tim kurator kami dapat menghitung presisi total biaya unit.
+                    </p>
+
+                    <!-- Live Activities -->
+                    <div class="space-y-3" id="live-activities">
+                        <div class="live-activity flex items-center gap-3 p-3 bg-white dark:bg-luxury-surface border border-gray-200 dark:border-gray-800 rounded text-xs">
+                            <span class="w-2 h-2 bg-green-500 rounded-full shrink-0 animate-pulse"></span>
+                            <span class="text-gray-600 dark:text-gray-400">Seseorang dari <strong class="text-gray-900 dark:text-white">Jakarta</strong> sedang berkonsultasi...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="w-full lg:w-3/5" data-aos="fade-left">
+                    <form action="submit_lead.php" method="POST" class="space-y-6 bg-white dark:bg-luxury-surface p-8 border border-gray-200 dark:border-gray-800">
+                        <!-- Honeypot anti-bot -->
+                        <div class="hidden" aria-hidden="true">
+                            <input type="text" name="honeypot_trap" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <input type="hidden" name="segmen" value="personal">
+                        <input type="hidden" name="source_page" value="home">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2 font-bold">Nama Lengkap</label>
+                                <input type="text" name="nama" required placeholder="Masukkan nama Anda" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2 font-bold">Nomor WhatsApp</label>
+                                <input type="tel" name="nomor_wa" required placeholder="08xxx atau 62xxx" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper transition-colors">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2 font-bold">Kota / Lokasi</label>
+                                <input type="text" name="kota" id="input-kota" placeholder="Contoh: Jakarta Selatan" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2 font-bold">Minat Produk</label>
+                                <select name="minat_produk" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper transition-colors appearance-none">
+                                    <option value="Konsultasi Umum">Konsultasi Umum</option>
+                                    <option value="Meja Turnamen 9FT">Meja Turnamen 9FT</option>
+                                    <option value="Meja Residensial 8FT">Meja Residensial 8FT</option>
+                                    <option value="Meja Rekreasi 7FT">Meja Rekreasi 7FT</option>
+                                    <option value="Aksesoris &amp; Stik">Aksesoris & Stik</option>
+                                    <option value="Custom / Proyek Khusus">Custom / Proyek Khusus</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2 font-bold">Pesan Tambahan <span class="text-gray-400">(opsional)</span></label>
+                            <textarea name="pesan_tambahan" rows="3" placeholder="Ceritakan kebutuhan spesifik Anda..." class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper transition-colors resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-luxury-copper text-white font-bold uppercase tracking-widest text-sm py-4 hover:bg-copper-dark transition-colors duration-300 shadow-lg shadow-luxury-copper/20" data-tr="form_btn">
+                            Kirim Data ke Kurator
+                        </button>
+
+                        <p class="text-[10px] text-gray-500 text-center">Atau hubungi langsung via <a href="" target="_blank" class="text-luxury-copper hover:underline">WhatsApp</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MAP SECTION ===== -->
+    <section class="py-24 bg-white dark:bg-luxury-bg transition-colors">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <span class="text-luxury-copper uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block" data-tr="dist_title">Jejak Distribusi</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-gray-900 dark:text-white mb-4" data-tr="dist_subtitle">Menguasai Teritori, Menjaga Kualitas.</h2>
+                <div class="w-12 h-px bg-luxury-copper mx-auto"></div>
+            </div>
+            <div class="w-full aspect-[16/9] bg-gray-200 dark:bg-luxury-surface border border-gray-200 dark:border-gray-800 overflow-hidden shadow-xl" data-aos="fade-up">
+                <iframe src="" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-8 mt-8 text-xs text-gray-500">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-luxury-copper" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <span></span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-luxury-copper" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VIDEO MODAL (hidden by default) ===== -->
+    <div id="video-modal" class="fixed inset-0 z-[100] bg-black/90 hidden items-center justify-center p-4">
+        <div class="relative w-full max-w-4xl aspect-video">
+            <button onclick="closeVideoModal()" class="absolute -top-10 right-0 text-white hover:text-luxury-copper text-sm uppercase tracking-widest">✕ Tutup</button>
+            <iframe id="video-iframe" src="" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- ===== QUIZ MODAL (hidden by default) ===== -->
+    <div id="quiz-modal" class="fixed inset-0 z-[100] bg-black/80 quiz-modal-backdrop hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-luxury-surface w-full max-w-lg p-8 relative">
+            <button onclick="closeQuizModal()" class="absolute top-4 right-4 text-gray-500 hover:text-luxury-copper text-xl">&times;</button>
+            <h3 class="font-serif text-2xl text-gray-900 dark:text-white mb-4">Temukan Meja Ideal Anda</h3>
+            <div id="quiz-content">
+                <p class="text-sm text-gray-500 mb-6">Jawab beberapa pertanyaan untuk rekomendasi personal dari tim kurator kami.</p>
+                <div class="space-y-4">
+                    <div>
+                        <label class="text-xs uppercase tracking-widest text-gray-500 font-bold block mb-2">Luas ruangan?</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button class="quiz-option px-4 py-2 border border-gray-300 dark:border-gray-700 text-xs hover:border-luxury-copper hover:text-luxury-copper transition-colors" data-value="small">3×3m</button>
+                            <button class="quiz-option px-4 py-2 border border-gray-300 dark:border-gray-700 text-xs hover:border-luxury-copper hover:text-luxury-copper transition-colors" data-value="medium">5×4m</button>
+                            <button class="quiz-option px-4 py-2 border border-gray-300 dark:border-gray-700 text-xs hover:border-luxury-copper hover:text-luxury-copper transition-colors" data-value="large">6×5m+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="quiz-result" class="hidden">
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Berdasarkan jawaban Anda, kami rekomendasikan:</p>
+                <p id="quiz-recommendation" class="font-serif text-xl text-luxury-copper mb-4"></p>
+                <a href="katalog.html" class="inline-block bg-luxury-copper text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-copper-dark transition-colors">Lihat Koleksi</a>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Source page tracking for lead forms -->
+    <form id="source-page-form" method="POST" action="submit_lead.php" class="hidden">
+        <input type="hidden" name="source_page" value="home">
+    </form>
+
+    
+
+    <script src="lang.js"></script>
+</body>
+</html>

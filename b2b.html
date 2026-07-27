@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title> | Vania Billiard</title>
+<meta name="description" content="">
+
+<!-- Open Graph -->
+<meta property="og:title" content=" | Vania Billiard">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vania Billiard">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+
+<!-- Google Fonts: Inter (sans) + Playfair Display (serif) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    darkMode: 'class',
+    theme: {
+        extend: {
+            colors: {
+                'luxury-bg':      '#0a0a0a',
+                'luxury-surface': '#141414',
+                'luxury-copper':  '#C86A36',
+                'copper': {
+                    light:  '#D4875E',
+                    DEFAULT:'#C86A36',
+                    dark:   '#A85A2C',
+                },
+            },
+            fontFamily: {
+                sans: ['Inter', 'system-ui', 'sans-serif'],
+                serif:['Playfair Display', 'Georgia', 'serif'],
+            },
+        },
+    },
+};
+</script>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<!-- AOS (Animate On Scroll) CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<!-- Inline custom styles -->
+<style>
+    /* Body opacity transition for page-load fade-in */
+    body {
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+    }
+    body.loaded {
+        opacity: 1;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #C86A36;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #D4875E;
+    }
+
+    /* Active language button styling */
+    .lang-active {
+        color: #C86A36 !important;
+        font-weight: 700;
+    }
+
+    /* Hover card effect */
+    .hover-card-effect {
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hover-card-effect:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(200, 106, 54, 0.15);
+    }
+
+    /* Editorial image zoom effect */
+    .editorial-img {
+        transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .editorial-img:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<!-- Theme initialization: apply stored theme before paint to prevent flash -->
+<script>
+(function() {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light') {
+        document.documentElement.classList.remove('dark');
+    } else {
+        // Default to dark
+        document.documentElement.classList.add('dark');
+    }
+})();
+</script>
+
+    
+
+    <style>
+        /* Kustomisasi Slider (Range Input) */
+        input[type=range] { -webkit-appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #C86A36; cursor: pointer; margin-top: -8px; box-shadow: 0 0 10px rgba(200,106,54,0.5); }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #333; border-radius: 2px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-luxury-bg dark:text-luxury-text font-sans antialiased overflow-x-hidden transition-colors duration-500 selection:bg-luxury-copper selection:text-white flex flex-col min-h-screen">
+
+    
+
+    <section class="pt-32 md:pt-40 pb-16 px-8 md:px-20 bg-gray-100 dark:bg-[#050505] transition-colors relative overflow-hidden border-b border-gray-200 dark:border-gray-900">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-luxury-copper/5 blur-[100px] pointer-events-none hidden md:block"></div>
+
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-center relative z-10">
+            <div class="w-full md:w-1/2" data-aos="fade-right">
+                <div class="flex items-center text-luxury-copper mb-6">
+                    <div class="w-12 h-px bg-luxury-copper mr-4"></div>
+                    <span class="text-xs uppercase tracking-[0.2em] font-bold">Vania Billiard B2B</span>
+                </div>
+                <h1 class="font-serif text-4xl md:text-6xl text-gray-900 dark:text-white leading-[1.1] mb-6">
+                    Skalabilitas.<br>
+                    <span class="italic text-gray-500 dark:text-gray-400">Presisi.</span> Profitabilitas.
+                </h1>
+                <p class="font-light text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-10">
+                    Bermitra dengan kami untuk pengadaan arena berskala masif. Kami mengatur pengadaan material, kargo FCL (Full Container Load), dan standarisasi tingkat kemiringan meja untuk setiap unit bisnis Anda.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#kalkulator" class="bg-luxury-copper text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#b05929] transition-all shadow-[0_5px_20px_rgba(200,106,54,0.3)]">Hitung ROI Arena</a>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-1/2" data-aos="fade-left">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white dark:bg-luxury-surface p-8 border border-gray-200 dark:border-gray-800 rounded-sm">
+                        <svg class="w-8 h-8 text-luxury-copper mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        <h4 class="text-gray-900 dark:text-white font-bold text-sm mb-2">Skala Ekspor Crate</h4>
+                        <p class="text-xs text-gray-500">Standar packing kayu ISPM 15 khusus pengiriman antar pulau dan negara.</p>
+                    </div>
+                    <div class="bg-white dark:bg-luxury-surface p-8 border border-gray-200 dark:border-gray-800 rounded-sm mt-8">
+                        <svg class="w-8 h-8 text-luxury-copper mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h4 class="text-gray-900 dark:text-white font-bold text-sm mb-2">Volume Margin</h4>
+                        <p class="text-xs text-gray-500">Struktur harga khusus untuk pengadaan komersial di atas 4 unit meja.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kalkulator" class="py-24 flex-grow bg-white dark:bg-luxury-bg transition-colors">
+        <div class="max-w-6xl mx-auto px-8 md:px-20">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-luxury-copper uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Proyeksi Finansial</span>
+                <h3 class="font-serif text-3xl md:text-4xl text-gray-900 dark:text-white mb-6">Kalkulator Potensi Laba Arena</h3>
+                <p class="font-light text-gray-600 dark:text-gray-400 text-sm max-w-2xl mx-auto">
+                    Simulasikan proyeksi pengembalian investasi (ROI) Anda. Atur parameter di bawah ini sesuai dengan tarif dan prediksi keramaian di kota Anda.
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="w-full lg:w-1/2 space-y-10 bg-gray-50 dark:bg-[#111] p-8 md:p-10 border border-gray-200 dark:border-gray-800" data-aos="fade-right">
+                    
+                    <div>
+                        <div class="flex justify-between mb-4">
+                            <label class="text-xs font-bold uppercase tracking-widest text-gray-800 dark:text-gray-300">Jumlah Meja (Unit)</label>
+                            <span id="val-unit" class="text-luxury-copper font-bold text-xl font-serif">10</span>
+                        </div>
+                        <input type="range" id="b2b-unit" min="2" max="40" value="10" class="w-full" oninput="updateROI()">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-4">
+                            <label class="text-xs font-bold uppercase tracking-widest text-gray-800 dark:text-gray-300">Tarif Sewa per Jam</label>
+                            <span id="val-price" class="text-luxury-copper font-bold text-xl font-serif">Rp 40.000</span>
+                        </div>
+                        <input type="range" id="b2b-price" min="20000" max="150000" step="5000" value="40000" class="w-full" oninput="updateROI()">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-4">
+                            <label class="text-xs font-bold uppercase tracking-widest text-gray-800 dark:text-gray-300">Estimasi Tersewa per Hari</label>
+                            <span id="val-hours" class="text-luxury-copper font-bold text-xl font-serif">8 Jam</span>
+                        </div>
+                        <input type="range" id="b2b-hours" min="2" max="24" value="8" class="w-full" oninput="updateROI()">
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 flex flex-col justify-center bg-luxury-copper p-8 md:p-12 text-white shadow-2xl hover-card-effect transition-all duration-500" data-aos="fade-left">
+                    <p class="text-[10px] uppercase tracking-widest font-bold mb-8 opacity-80">Proyeksi Pendapatan Kotor</p>
+                    
+                    <div class="mb-8">
+                        <p class="text-xs font-light mb-2">Potensi Pemasukan Bulanan</p>
+                        <h4 id="res-monthly" class="font-serif text-4xl md:text-5xl font-bold">Rp 96.000.000</h4>
+                    </div>
+
+                    <div class="border-t border-white/20 pt-8 mb-8">
+                        <p class="text-xs font-light mb-2">Estimasi Break Even Point (Balik Modal)*</p>
+                        <div class="flex items-end">
+                            <h4 id="res-bep" class="font-serif text-3xl font-bold mr-2">1.9</h4>
+                            <span class="text-sm font-light mb-1">Bulan</span>
+                        </div>
+                    </div>
+
+                    <p class="text-[9px] opacity-70 italic font-light">
+                        *Asumsi harga modal meja adalah Rp 18.000.000/unit. Kalkulasi ini adalah proyeksi kotor (Gross) sebelum dikurangi biaya operasional gedung, listrik, dan gaji karyawan. Hubungi kami untuk quotation harga B2B khusus.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-8 md:px-20 bg-gray-100 dark:bg-[#050505] transition-colors border-t border-gray-200 dark:border-gray-900">
+        <div class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up">
+            <h3 class="font-serif text-3xl text-gray-900 dark:text-white mb-4">Request Quotation Pengadaan</h3>
+            <p class="font-light text-gray-600 dark:text-gray-400 text-sm">Tim kurator B2B kami akan menyusun proposal penawaran resmi, membedah spesifikasi komponen, dan merancang timeline logistik ekspor/domestik untuk proyek Anda.</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto bg-white dark:bg-luxury-surface p-8 md:p-12 border border-gray-200 dark:border-gray-800 shadow-xl" data-aos="fade-up" data-aos-delay="100">
+            <form action="submit_lead.php" method="POST" class="space-y-8">
+                <input type="hidden" name="segmen" value="b2b_spesifik">
+                <input type="hidden" name="source_page" value="b2b.html">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2">Nama Entitas / Perusahaan</label>
+                        <input type="text" name="perusahaan" required class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2">Nama Penghubung (PIC)</label>
+                        <input type="text" name="nama" required class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2">Nomor WhatsApp Valid</label>
+                        <input type="tel" name="nomor_wa" required class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2">Lokasi Arena (Kota/Negara)</label>
+                        <input type="text" name="kota" required class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest text-gray-500 mb-2">Spesifikasi Kebutuhan & Target Pembukaan Arena</label>
+                    <textarea name="pesan_tambahan" rows="3" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper text-sm" placeholder="Contoh: Butuh 15 Unit Meja 9ft. Rencana opening arena bulan Agustus 2026."></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-luxury-copper text-white font-bold uppercase tracking-widest text-sm py-4 hover:bg-[#b05929] transition-colors mt-4">
+                    Kirim Permintaan Proposal
+                </button>
+            </form>
+        </div>
+    </section>
+
+    
+
+    
+    <script src="lang.js"></script>
+</body>
+</html>

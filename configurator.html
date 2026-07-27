@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title> | Vania Billiard</title>
+<meta name="description" content="">
+
+<!-- Open Graph -->
+<meta property="og:title" content=" | Vania Billiard">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vania Billiard">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+
+<!-- Google Fonts: Inter (sans) + Playfair Display (serif) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    darkMode: 'class',
+    theme: {
+        extend: {
+            colors: {
+                'luxury-bg':      '#0a0a0a',
+                'luxury-surface': '#141414',
+                'luxury-copper':  '#C86A36',
+                'copper': {
+                    light:  '#D4875E',
+                    DEFAULT:'#C86A36',
+                    dark:   '#A85A2C',
+                },
+            },
+            fontFamily: {
+                sans: ['Inter', 'system-ui', 'sans-serif'],
+                serif:['Playfair Display', 'Georgia', 'serif'],
+            },
+        },
+    },
+};
+</script>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<!-- AOS (Animate On Scroll) CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<!-- Inline custom styles -->
+<style>
+    /* Body opacity transition for page-load fade-in */
+    body {
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+    }
+    body.loaded {
+        opacity: 1;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #C86A36;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #D4875E;
+    }
+
+    /* Active language button styling */
+    .lang-active {
+        color: #C86A36 !important;
+        font-weight: 700;
+    }
+
+    /* Hover card effect */
+    .hover-card-effect {
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hover-card-effect:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(200, 106, 54, 0.15);
+    }
+
+    /* Editorial image zoom effect */
+    .editorial-img {
+        transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .editorial-img:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<!-- Theme initialization: apply stored theme before paint to prevent flash -->
+<script>
+(function() {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light') {
+        document.documentElement.classList.remove('dark');
+    } else {
+        // Default to dark
+        document.documentElement.classList.add('dark');
+    }
+})();
+</script>
+
+    
+
+    <style>
+        /* ===== Configurator Step Transitions ===== */
+        .config-step { display: none; opacity: 0; transform: translateX(30px); transition: opacity 0.4s ease, transform 0.4s ease; }
+        .config-step.active { display: block; opacity: 1; transform: translateX(0); }
+        .config-step.slide-out { opacity: 0; transform: translateX(-30px); }
+
+        /* ===== Selection Cards ===== */
+        .size-card { transition: all 0.3s ease; cursor: pointer; }
+        .size-card:hover, .size-card.selected {
+            border-color: #C86A36;
+            box-shadow: 0 0 20px rgba(200,106,54,0.15);
+        }
+        .size-card.selected { background: rgba(200,106,54,0.08); }
+
+        /* ===== Color / Wood Swatches ===== */
+        .swatch { transition: all 0.25s ease; cursor: pointer; }
+        .swatch:hover { transform: scale(1.1); }
+        .swatch.selected { box-shadow: 0 0 0 3px #C86A36, 0 0 12px rgba(200,106,54,0.3); transform: scale(1.1); }
+
+        /* ===== Accessory Checkbox ===== */
+        .accessory-item { transition: all 0.25s ease; cursor: pointer; }
+        .accessory-item:hover { border-color: #C86A36; }
+        .accessory-item.selected { border-color: #C86A36; background: rgba(200,106,54,0.06); }
+
+        /* ===== Progress Bar ===== */
+        .progress-step { transition: all 0.4s ease; }
+        .progress-step.completed { background: #C86A36; color: white; }
+        .progress-step.current { background: #C86A36; color: white; box-shadow: 0 0 12px rgba(200,106,54,0.4); }
+        .progress-step.upcoming { background: #1f1f1f; color: #666; }
+        .progress-line { transition: background 0.4s ease; }
+
+        /* ===== Table Preview CSS Drawing ===== */
+        .table-preview-container {
+            perspective: 800px;
+        }
+        .table-preview {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 2 / 1;
+            margin: 0 auto;
+            border-radius: 8px;
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+        }
+        /* Wood rail (outer frame) */
+        .table-rail {
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            border: 12px solid;
+            transition: border-color 0.5s ease;
+        }
+        /* Cloth surface */
+        .table-cloth {
+            position: absolute;
+            inset: 12px;
+            border-radius: 3px;
+            transition: background-color 0.5s ease;
+        }
+        /* Pockets (6: 4 corners + 2 sides) */
+        .pocket {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #111;
+            border-radius: 50%;
+            border: 2px solid #333;
+            z-index: 2;
+        }
+        .pocket-tl { top: 4px; left: 4px; }
+        .pocket-tr { top: 4px; right: 4px; }
+        .pocket-bl { bottom: 4px; left: 4px; }
+        .pocket-br { bottom: 4px; right: 4px; }
+        .pocket-ml { top: 50%; left: 4px; transform: translateY(-50%); }
+        .pocket-mr { top: 50%; right: 4px; transform: translateY(-50%); }
+
+        /* Center diamonds / markers */
+        .table-marker {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        /* Head string line */
+        .head-string {
+            position: absolute;
+            top: 12px;
+            bottom: 12px;
+            left: 25%;
+            width: 1px;
+            background: rgba(255,255,255,0.08);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-luxury-bg dark:text-gray-100 font-sans antialiased overflow-x-hidden transition-colors duration-500 selection:bg-luxury-copper selection:text-white flex flex-col min-h-screen">
+
+    
+
+    <!-- ===== PAGE HEADER ===== -->
+    <header class="pt-32 pb-12 px-8 md:px-20 bg-[#050505] border-b border-gray-900 text-center">
+        <div class="max-w-3xl mx-auto" data-aos="fade-up">
+            <span class="text-luxury-copper uppercase tracking-[0.3em] text-[10px] font-bold mb-4 block">Konfigurator Interaktif</span>
+            <h1 class="font-serif text-4xl md:text-5xl text-white mb-4">Rancang Meja Impian.</h1>
+            <div class="w-12 h-px bg-luxury-copper mx-auto mb-4"></div>
+            <p class="font-light text-gray-400 text-sm leading-relaxed">
+                Pilih ukuran, warna kain, finishing kayu, dan aksesoris. Harga terhitung secara real-time.
+            </p>
+        </div>
+    </header>
+
+    <main class="flex-grow bg-white dark:bg-luxury-bg transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+
+            <!-- ===== PROGRESS BAR ===== -->
+            <div class="flex items-center justify-center gap-0 mb-16" data-aos="fade-up">
+                
+                    <div class="flex items-center">
+                        <div id="progress-" class="progress-step w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ">
+                            
+                        </div>
+                        <span class="hidden sm:inline text-xs ml-2 mr-4 font-medium text-gray-500 dark:text-gray-400" id="progress-label-"></span>
+                        
+                            <div id="progress-line-" class="progress-line w-8 sm:w-16 h-0.5 bg-gray-800"></div>
+                        
+                    </div>
+                
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+
+                <!-- ===== LEFT: CONFIGURATION STEPS ===== -->
+                <div class="w-full lg:w-3/5">
+
+                    <!-- STEP 1: Table Size -->
+                    <div id="step-1" class="config-step active">
+                        <h2 class="font-serif text-2xl text-white mb-2">Pilih Ukuran Meja</h2>
+                        <p class="text-sm text-gray-500 mb-8">Setiap ukuran dirancang untuk kebutuhan ruang berbeda.</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            
+                            <div class="size-card bg-luxury-surface border border-gray-800 rounded-lg p-6 text-center"
+                                 data-size="" data-price=""
+                                 onclick="selectSize(this)">
+                                <div class="text-luxury-copper font-serif text-3xl font-bold mb-2"></div>
+                                <div class="text-gray-400 text-sm mb-1"></div>
+                                <div class="text-gray-600 text-xs mb-4"></div>
+                                <div class="border-t border-gray-800 pt-3">
+                                    <span class="text-white font-serif text-lg"></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Cloth Color -->
+                    <div id="step-2" class="config-step">
+                        <h2 class="font-serif text-2xl text-white mb-2">Pilih Wama Kain</h2>
+                        <p class="text-sm text-gray-500 mb-8">Kain worsted premium tanpa bulu — sudah termasuk harga dasar.</p>
+
+                        <div class="flex flex-wrap gap-6">
+                            
+                            <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="selectColor(this)" data-color-id="" data-color-name="" data-color-hex="">
+                                <div class="swatch w-16 h-16 rounded-full border-2 border-gray-700 shadow-inner" style="background-color: ;"></div>
+                                <span class="text-xs text-gray-500 group-hover:text-gray-300 transition-colors"></span>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Wood Finish -->
+                    <div id="step-3" class="config-step">
+                        <h2 class="font-serif text-2xl text-white mb-2">Pilih Finishing Kayu</h2>
+                        <p class="text-sm text-gray-500 mb-8">Kayu solid pilihan dengan finishing tangan.</p>
+
+                        <div class="flex flex-wrap gap-6">
+                            
+                            <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="selectWood(this)" data-wood-id="" data-wood-name="" data-wood-hex="" data-wood-extra="">
+                                <div class="swatch w-16 h-16 rounded-full border-2 border-gray-700 shadow-inner" style="background-color: ;"></div>
+                                <span class="text-xs text-gray-300 font-medium"></span>
+                                <span class="text-[10px] text-gray-500"></span>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Accessories -->
+                    <div id="step-4" class="config-step">
+                        <h2 class="font-serif text-2xl text-white mb-2">Pilih Aksesoris</h2>
+                        <p class="text-sm text-gray-500 mb-8">Lengkapi pengalaman bermain Anda.</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            
+                            <div class="accessory-item bg-luxury-surface border border-gray-800 rounded-lg p-5 flex items-start gap-4"
+                                 data-acc-id="" data-acc-name="" data-acc-price=""
+                                 onclick="toggleAccessory(this)">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-luxury-copper/10 flex items-center justify-center text-lg">
+                                    
+                                </div>
+                                <div class="flex-grow min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h4 class="text-sm font-semibold text-white"></h4>
+                                        <span class="text-xs text-luxury-copper font-medium whitespace-nowrap"></span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1"></p>
+                                </div>
+                                <div class="flex-shrink-0 w-5 h-5 rounded border-2 border-gray-700 flex items-center justify-center acc-check transition-colors">
+                                    <svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex items-center justify-between mt-10 pt-8 border-t border-gray-800">
+                        <button id="btn-back" onclick="goBack()" class="hidden px-6 py-3 border border-gray-700 text-gray-400 text-xs font-bold uppercase tracking-widest hover:border-luxury-copper hover:text-luxury-copper transition-all duration-300">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                            Kembali
+                        </button>
+                        <div></div>
+                        <button id="btn-next" onclick="goNext()" class="px-8 py-3 bg-luxury-copper text-white text-xs font-bold uppercase tracking-widest hover:bg-copper-dark transition-all duration-300 shadow-lg shadow-luxury-copper/20">
+                            Selanjutnya
+                            <svg class="w-4 h-4 inline ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ===== RIGHT: LIVE PREVIEW + SUMMARY ===== -->
+                <div class="w-full lg:w-2/5">
+                    <div class="lg:sticky lg:top-28 space-y-6">
+
+                        <!-- CSS Table Preview -->
+                        <div class="bg-luxury-surface border border-gray-800 rounded-lg p-6" data-aos="fade-left">
+                            <h3 class="text-xs uppercase tracking-widest text-gray-500 font-bold mb-4">Preview Meja</h3>
+                            <div class="table-preview-container">
+                                <div class="table-preview" id="table-preview">
+                                    <!-- Rail (wood color) -->
+                                    <div class="table-rail" id="preview-rail" style="border-color: #6B2D2D;"></div>
+                                    <!-- Cloth surface -->
+                                    <div class="table-cloth" id="preview-cloth" style="background-color: #1F2937;"></div>
+                                    <!-- Head string -->
+                                    <div class="head-string"></div>
+                                    <!-- 6 Pockets -->
+                                    <div class="pocket pocket-tl"></div>
+                                    <div class="pocket pocket-tr"></div>
+                                    <div class="pocket pocket-bl"></div>
+                                    <div class="pocket pocket-br"></div>
+                                    <div class="pocket pocket-ml"></div>
+                                    <div class="pocket pocket-mr"></div>
+                                    <!-- Center marker -->
+                                    <div class="table-marker" style="top:50%;left:50%;transform:translate(-50%,-50%);width:6px;height:6px;"></div>
+                                </div>
+                            </div>
+                            <!-- Size label -->
+                            <p class="text-center text-sm text-gray-400 mt-4 font-serif" id="preview-size-label">Pilih ukuran meja</p>
+                        </div>
+
+                        <!-- Price Summary Panel -->
+                        <div class="bg-luxury-surface border border-gray-800 rounded-lg p-6" data-aos="fade-left" data-aos-delay="100">
+                            <h3 class="text-xs uppercase tracking-widest text-gray-500 font-bold mb-5">Ringkasan Konfigurasi</h3>
+
+                            <div class="space-y-3 text-sm" id="summary-items">
+                                <div class="flex items-center justify-between text-gray-500">
+                                    <span>Ukuran meja</span>
+                                    <span id="sum-size" class="text-gray-400">—</span>
+                                </div>
+                                <div class="flex items-center justify-between text-gray-500">
+                                    <span>Warna kain</span>
+                                    <span id="sum-color" class="text-gray-400">—</span>
+                                </div>
+                                <div class="flex items-center justify-between text-gray-500">
+                                    <span>Finishing kayu</span>
+                                    <span id="sum-wood" class="text-gray-400">—</span>
+                                </div>
+                                <div id="sum-accessories-wrapper" class="hidden">
+                                    <div class="w-full h-px bg-gray-800 my-2"></div>
+                                    <div class="flex items-center justify-between text-gray-500">
+                                        <span>Aksesoris</span>
+                                        <span id="sum-accessories-price" class="text-gray-400">—</span>
+                                    </div>
+                                    <div id="sum-accessories-list" class="text-xs text-gray-600 mt-1"></div>
+                                </div>
+                            </div>
+
+                            <div class="w-full h-px bg-gray-800 my-5"></div>
+
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-400 font-bold uppercase tracking-widest">Total</span>
+                                <span class="font-serif text-2xl text-luxury-copper font-bold" id="sum-total">Rp 0</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <a id="config-wa-btn" href="#" target="_blank" rel="noopener noreferrer"
+                           class="block w-full text-center px-6 py-4 bg-[#25D366] text-white text-sm font-bold uppercase tracking-widest hover:bg-[#1ebe59] transition-all duration-300 shadow-lg shadow-[#25D366]/20 rounded-lg"
+                           data-aos="fade-left" data-aos-delay="200">
+                            <svg class="w-5 h-5 inline mr-2 -mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                            Konsultasi via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+
+    ';
+        var lines = ['Halo Vania Billiard, saya ingin konsultasi tentang konfigurasi meja:'];
+        if (config.sizeLabel && config.sizeLabel !== '') lines.push('- Ukuran: ' + config.sizeLabel);
+        if (config.colorLabel) lines.push('- Warna kain: ' + config.colorLabel);
+        if (config.woodLabel) lines.push('- Finishing kayu: ' + config.woodLabel);
+        if (accNames && accNames.length > 0) lines.push('- Aksesoris: ' + accNames.join(', '));
+        lines.push('- Total estimasi: ' + formatRupiah(total));
+        lines.push('');
+        lines.push('Mohon info lebih lanjut. Terima kasih!');
+
+        var msg = encodeURIComponent(lines.join('\\n'));
+        var url = 'https://wa.me/' + waNumber + '?text=' + msg;
+        document.getElementById('config-wa-btn').href = url;
+    }
+
+    // Initialize
+    showStep(1);
+
+JS;
+    require_once PARTIALS_PATH . 'scripts.php';
+    ?>
+</body>
+</html>

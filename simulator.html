@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title> | Vania Billiard</title>
+<meta name="description" content="">
+
+<!-- Open Graph -->
+<meta property="og:title" content=" | Vania Billiard">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vania Billiard">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+
+<!-- Google Fonts: Inter (sans) + Playfair Display (serif) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    darkMode: 'class',
+    theme: {
+        extend: {
+            colors: {
+                'luxury-bg':      '#0a0a0a',
+                'luxury-surface': '#141414',
+                'luxury-copper':  '#C86A36',
+                'copper': {
+                    light:  '#D4875E',
+                    DEFAULT:'#C86A36',
+                    dark:   '#A85A2C',
+                },
+            },
+            fontFamily: {
+                sans: ['Inter', 'system-ui', 'sans-serif'],
+                serif:['Playfair Display', 'Georgia', 'serif'],
+            },
+        },
+    },
+};
+</script>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<!-- AOS (Animate On Scroll) CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<!-- Inline custom styles -->
+<style>
+    /* Body opacity transition for page-load fade-in */
+    body {
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+    }
+    body.loaded {
+        opacity: 1;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #C86A36;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #D4875E;
+    }
+
+    /* Active language button styling */
+    .lang-active {
+        color: #C86A36 !important;
+        font-weight: 700;
+    }
+
+    /* Hover card effect */
+    .hover-card-effect {
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hover-card-effect:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(200, 106, 54, 0.15);
+    }
+
+    /* Editorial image zoom effect */
+    .editorial-img {
+        transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .editorial-img:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<!-- Theme initialization: apply stored theme before paint to prevent flash -->
+<script>
+(function() {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light') {
+        document.documentElement.classList.remove('dark');
+    } else {
+        // Default to dark
+        document.documentElement.classList.add('dark');
+    }
+})();
+</script>
+
+    
+
+    <style>
+        .bg-grid-pattern {
+            background-size: 25px 25px; /* 50px = 1m, 25px = 0.5m */
+            background-image: linear-gradient(to right, rgba(128, 128, 128, 0.08) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(128, 128, 128, 0.08) 1px, transparent 1px);
+        }
+        
+        .draggable { cursor: grab; touch-action: none; position: absolute; user-select: none; transition: box-shadow 0.2s, border-color 0.2s; }
+        .draggable:active { cursor: grabbing; z-index: 50 !important; }
+        
+        .ruler-val { position: absolute; font-size: 9px; font-weight: bold; color: #C86A36; background: rgba(255,255,255,0.9); padding: 1px 4px; border-radius: 2px; pointer-events: none; z-index: 60;}
+        .dark .ruler-val { background: rgba(0,0,0,0.8); color: #C86A36; }
+        
+        .ruler-line { position: absolute; background: #C86A36; opacity: 0.5; pointer-events: none; z-index: 59;}
+        .r-top { width: 1px; left: 50%; top: 0; transform: translateX(-50%); }
+        .r-bottom { width: 1px; left: 50%; bottom: 0; transform: translateX(-50%); }
+        .r-left { height: 1px; top: 50%; left: 0; transform: translateY(-50%); }
+        .r-right { height: 1px; top: 50%; right: 0; transform: translateY(-50%); }
+        
+        @keyframes pulse-red { 0% { background-color: rgba(239, 68, 68, 0.1); } 50% { background-color: rgba(239, 68, 68, 0.3); } 100% { background-color: rgba(239, 68, 68, 0.1); } }
+        .aura-danger { border-color: #ef4444 !important; animation: pulse-red 1.5s infinite; }
+        
+        @keyframes pulse-orange { 0% { background-color: rgba(249, 115, 22, 0.1); } 50% { background-color: rgba(249, 115, 22, 0.3); } 100% { background-color: rgba(249, 115, 22, 0.1); } }
+        .aura-warning { border-color: #f97316 !important; animation: pulse-orange 1.5s infinite; }
+        
+        .btn-delete { display: none; }
+        .draggable:hover .btn-delete { display: flex; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-luxury-bg dark:text-gray-100 font-sans antialiased overflow-x-hidden transition-colors duration-500 selection:bg-luxury-copper selection:text-white flex flex-col h-screen">
+
+    
+
+    <main class="flex-grow flex flex-col lg:flex-row overflow-hidden mt-[70px]">        
+        <aside class="w-full lg:w-[350px] shrink-0 bg-white dark:bg-[#050505] p-6 flex flex-col border-r border-gray-200 dark:border-gray-900 z-10 shadow-xl overflow-y-auto">
+            <span class="text-luxury-copper uppercase tracking-[0.2em] text-[10px] font-bold mb-2">Interactive Tool</span>
+            <h2 class="font-serif text-2xl text-gray-900 dark:text-white mb-4" data-tr="sidebar_title">Arsitektur Ruang</h2>
+            
+            <div class="space-y-5 flex-grow">
+                <div class="bg-gray-50 dark:bg-luxury-surface p-4 border border-gray-200 dark:border-gray-800 rounded">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-luxury-copper mb-3" data-tr="step_1">1. Dimensi Denah Utama</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[9px] uppercase tracking-widest text-gray-500 mb-1" data-tr="label_length">Panjang (M)</label>
+                            <input type="number" id="input-length" value="6" step="0.5" min="3" max="50" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] uppercase tracking-widest text-gray-500 mb-1" data-tr="label_width">Lebar (M)</label>
+                            <input type="number" id="input-width" value="5" step="0.5" min="3" max="50" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-luxury-copper">
+                        </div>
+                    </div>
+                    <button onclick="resizeRoom()" class="w-full border border-luxury-copper text-luxury-copper hover:bg-luxury-copper hover:text-white text-[10px] font-bold uppercase tracking-widest py-2 mt-4 transition-all" data-tr="btn_apply">Terapkan Dimensi</button>
+                </div>
+
+                <div class="bg-gray-50 dark:bg-luxury-surface p-4 border border-gray-200 dark:border-gray-800 rounded">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-luxury-copper mb-3" data-tr="step_2">2. Tambah Elemen</p>
+                    <div class="space-y-3">
+                        <select id="obj-selector" class="w-full bg-white dark:bg-[#0a0a0a] border border-gray-300 dark:border-gray-700 py-2 px-3 text-xs text-gray-900 dark:text-white focus:outline-none" onchange="toggleWallInputs()">
+                            <option value="table_9">Meja Turnamen 9FT (2.8x1.5m)</option>
+                            <option value="table_8">Meja Residensial 8FT (2.4x1.3m)</option>
+                            <option value="table_7">Meja Rekreasi 7FT (2.1x1.2m)</option>
+                            <option disabled>──────────</option>
+                            <option value="sofa_3">Sofa Penonton (2.2x0.8m)</option>
+                            <option value="cabinet">Lemari Rak Stick (1.0x0.4m)</option>
+                            <option value="pillar">Pilar Beton (0.5x0.5m)</option>
+                            <option value="wall_block">Tembok Sekat Custom</option>
+                        </select>
+                        
+                        <div id="custom-wall-inputs" class="hidden grid grid-cols-2 gap-2 bg-gray-200 dark:bg-gray-800 p-2 rounded">
+                            <div><label class="text-[8px] uppercase text-gray-500">P. Tembok (M)</label><input type="number" id="wall-len" value="2" step="0.5" class="w-full text-xs p-1 bg-white dark:bg-[#111] dark:text-white"></div>
+                            <div><label class="text-[8px] uppercase text-gray-500">L. Tembok (M)</label><input type="number" id="wall-wid" value="1" step="0.5" class="w-full text-xs p-1 bg-white dark:bg-[#111] dark:text-white"></div>
+                        </div>
+
+                        <button onclick="spawnObject()" class="w-full bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white text-[10px] font-bold uppercase tracking-widest py-2 hover:bg-luxury-copper hover:text-white transition-all" data-tr="btn_drop">+ Drop ke Kanvas</button>
+                    </div>
+                </div>
+
+                <button onclick="smartAutoLayout()" class="w-full bg-luxury-copper text-white font-bold uppercase tracking-widest text-[11px] py-4 hover:bg-[#b05929] hover:shadow-[0_5px_15px_rgba(200,106,54,0.4)] transition-all flex items-center justify-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    <span data-tr="btn_magic">Sihir Rekomendasi Layout</span>
+                </button>
+
+                <div class="pt-4 border-t border-gray-200 dark:border-gray-800">
+                    <div class="flex justify-between items-center mb-2">
+                        <p class="font-bold uppercase tracking-widest text-[10px] text-gray-800 dark:text-gray-300">Live Inventory:</p>
+                        <span id="inv-count" class="text-xs font-bold text-luxury-copper">0 Unit</span>
+                    </div>
+                    
+                    <div class="mt-4 mb-4 p-4 bg-luxury-copper text-white rounded shadow-md">
+                        <p class="text-[9px] uppercase tracking-widest mb-1 opacity-80" data-tr="est_cost">Estimasi Nilai Aset</p>
+                        <p id="live-price" class="text-xl font-serif font-bold">Rp 0</p>
+                        <p class="text-[8px] mt-1 opacity-60" data-tr="est_note">*Tidak termasuk kargo / custom item.</p>
+                    </div>
+
+                    <div class="text-[9px] text-gray-500 space-y-1.5 leading-relaxed">
+                        <p class="flex items-center text-gray-700 dark:text-gray-400"><span class="w-2 h-2 rounded bg-green-500 mr-2 shrink-0"></span> <span data-tr="leg_1">Jarak stik aman (> 1.5 meter).</span></p>
+                        <p class="flex items-center text-gray-700 dark:text-gray-400"><span class="w-2 h-2 rounded bg-orange-500 mr-2 shrink-0"></span> <span data-tr="leg_2">Toleransi (Menyenggol sofa/rak).</span></p>
+                        <p class="flex items-center text-gray-700 dark:text-gray-400"><span class="w-2 h-2 rounded bg-red-500 mr-2 shrink-0 animate-pulse"></span> <b class="text-red-500 mr-1" data-tr="leg_warn">FATAL:</b> <span data-tr="leg_3">Mentok tembok / meja lain!</span></p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="flex-grow bg-gray-200 dark:bg-[#111] bg-grid-pattern relative overflow-auto flex items-center justify-center p-8 cursor-crosshair" id="canvas-container">
+            
+            <div id="virtual-room" class="bg-white dark:bg-luxury-surface border-2 border-gray-400 dark:border-gray-700 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative transition-all duration-500 flex items-center justify-center origin-center shrink-0">
+                <div class="absolute top-2 left-2 text-[10px] uppercase tracking-widest font-bold text-gray-400 z-0">Denah 2D</div>
+                <button onclick="clearRoom()" class="absolute top-2 right-2 text-[9px] uppercase tracking-widest font-bold text-red-500 hover:bg-red-500 hover:text-white px-2 py-1 rounded transition-colors z-50" data-tr="btn_reset">Reset Ruang</button>
+            </div>
+
+        </section>
+    </main>
+
+    
+    <script src="lang.js"></script>
+</body>
+</html>

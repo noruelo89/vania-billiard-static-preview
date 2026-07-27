@@ -1,0 +1,63 @@
+<?php
+header('Content-Type: application/xml; charset=utf-8');
+require_once 'includes/init.php';
+
+$baseUrl = 'https://vaniabilliard.com';
+$today = date('Y-m-d');
+
+$staticPages = [
+    ['loc' => '/index.php', 'priority' => '1.0', 'changefreq' => 'weekly'],
+    ['loc' => '/katalog.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
+    ['loc' => '/simulator.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
+    ['loc' => '/b2b.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
+    ['loc' => '/jurnal.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
+    ['loc' => '/profil.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
+    ['loc' => '/configurator.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
+];
+
+// Fetch products
+$products = [];
+try {
+    $stmt = $pdo->query("SELECT id, updated_at FROM products WHERE status = 'active' ORDER BY id");
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    // Continue without products if table doesn't exist
+}
+
+// Fetch published articles
+$articles = [];
+try {
+    $stmt = $pdo->query("SELECT slug, updated_at FROM articles WHERE status = 'published' ORDER BY id");
+    $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    // Continue without articles if table doesn't exist
+}
+
+echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?php foreach ($staticPages as $page): ?>
+    <url>
+        <loc><?php echo $baseUrl . htmlspecialchars($page['loc']); ?></loc>
+        <lastmod><?php echo $today; ?></lastmod>
+        <changefreq><?php echo $page['changefreq']; ?></changefreq>
+        <priority><?php echo $page['priority']; ?></priority>
+    </url>
+<?php endforeach; ?>
+<?php foreach ($products as $product): ?>
+    <url>
+        <loc><?php echo $baseUrl; ?>/detail.php?id=<?php echo (int)$product['id']; ?></loc>
+        <lastmod><?php echo $product['updated_at'] ? date('Y-m-d', strtotime($product['updated_at'])) : $today; ?></lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+<?php endforeach; ?>
+<?php foreach ($articles as $article): ?>
+    <url>
+        <loc><?php echo $baseUrl; ?>/jurnal_detail.php?slug=<?php echo htmlspecialchars($article['slug']); ?></loc>
+        <lastmod><?php echo $article['updated_at'] ? date('Y-m-d', strtotime($article['updated_at'])) : $today; ?></lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+<?php endforeach; ?>
+</urlset>
